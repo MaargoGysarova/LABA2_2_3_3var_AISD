@@ -15,9 +15,14 @@ struct Edge{
 };
 
 struct Vertex{
-        Edge * edge;
+        vector <Edge> edge;
         int id;
         int color;
+        explicit Vertex(int id){
+            this->id = id;
+            edge = nullptr;
+            color = 0;
+        }
 };
 
 class Graph {
@@ -30,8 +35,8 @@ public:
     bool delete_vertex(int id); //Удаление вершины
 
     bool find_edge(int id_from, int id_to); //Проверка наличия ребра
-    void add_edge(int id_from, int id_to, int weight); //Добавление ребра
-    void delete_edge(int id_from, int id_to); //Удаление ребра
+    bool add_edge(int id_from, int id_to, int weight); //Добавление ребра
+    bool delete_edge(int id_from, int id_to); //Удаление ребра
 
     vector<Edge> edges(const Vertex& vertex);//получение всех ребер, выходящих из вершины
 
