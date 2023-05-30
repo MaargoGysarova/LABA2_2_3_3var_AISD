@@ -38,7 +38,8 @@ public:
     bool add_edge(int id_from, int id_to, int weight); //Добавление ребра
     bool delete_edge(int id_from, int id_to); //Удаление ребра
 
-    vector<Edge> edges(const Vertex& vertex);//получение всех ребер, выходящих из вершины
+    vector<Edge>& edges(const Vertex& vertex);//получение всех ребер, выходящих из вершины по ссылке
+
 
     //поиск кратчайшего пути
     vector<Edge> shortest_path(const Vertex& from,const Vertex& to) const;

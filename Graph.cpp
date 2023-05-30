@@ -95,5 +95,31 @@ bool Graph::delete_edge(int id_from, int id_to) {
     }
 }
 
+vector<Edge>& Graph::edges(const Vertex &vertex) {
+    int index = find_vertex(vertex.id);
+    if (index == -1) {
+        throw "Vertex not found";
+    }
+    return graph[index].edge;
+}
+
+size_t Graph::order() const {
+    return graph.size();
+}
+
+size_t Graph::degree() const {
+    int max = 0;
+    for (auto & i : graph) {
+        if (i.edge.size() > max) {
+            max = i.edge.size();
+        }
+    }
+    return max;
+}
+
+
+
+
+
 
 
