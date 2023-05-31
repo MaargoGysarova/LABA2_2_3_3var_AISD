@@ -1,16 +1,19 @@
 #ifndef LABA2_2_3_3VAR_AISD_GRAPH_H
 #define LABA2_2_3_3VAR_AISD_GRAPH_H
 #include <vector>
+#include <functional>
 using namespace std;
 
 struct Edge{
     Edge* next;
     int weight;
     int id;
+    int color;
     Edge(int id, int weight){
         this->id = id;
         this->weight = weight;
         next = nullptr;
+        color = 0;
     }
 };
 
@@ -20,7 +23,7 @@ struct Vertex{
         int color;
         explicit Vertex(int id){
             this->id = id;
-            edge = nullptr;
+            edge = vector<Edge>();
             color = 0;
         }
 };
@@ -30,7 +33,7 @@ private:
     vector<Vertex> graph;
 public:
     ~Graph(); // Деструктор
-    int find_vertex(int id); //Проверка наличия вершины
+    int find_vertex(int id) const; //Проверка наличия вершины
     bool add_vertex(int id); //Добавление вершины
     bool delete_vertex(int id); //Удаление вершины
 
@@ -49,7 +52,10 @@ public:
 
     void print() const; //вывод графа
 
-    vector<Vertex>  walk(const Vertex& start_vertex)const;
+    vector<Vertex>  walk_bfs(int index_v, const function<vector<Vertex>(const Vertex&)>& action)const;
+
+
+
 
 };
 

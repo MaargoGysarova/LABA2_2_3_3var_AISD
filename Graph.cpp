@@ -3,6 +3,9 @@
 //
 
 #include "Graph.h"
+#include <iostream>
+#include <vector>
+using namespace std;
 
 Graph::~Graph() {
     for (auto & i : graph) {
@@ -15,7 +18,7 @@ Graph::~Graph() {
     graph.clear();
 }
 
-int Graph::find_vertex(int id) {
+int Graph::find_vertex(int id) const {
     for (int i = 0; i < graph.size(); i++) {
         if (graph[i].id == id) {
             return i;
@@ -54,6 +57,12 @@ bool Graph::find_edge(int id_from, int id_to) {
         return false;
     }
     vector<Edge> edge = graph[index_from].edge;
+    if (edge.size()==1 && edge.begin()->id == id_to) {
+        return true;
+    }
+    if (edge.size()==1 && edge.begin()->id != id_to){
+        return false;}
+
     while (edge.begin() != edge.end()) {
         if (edge.begin()->id == id_to) {
             return true;
@@ -116,6 +125,65 @@ size_t Graph::degree() const {
     }
     return max;
 }
+
+void Graph::print() const {
+    for (auto & i : graph) {
+        cout << i.id << ": ";
+        vector <Edge> edge = i.edge;
+        while (edge.begin() != edge.end()) {
+            cout << edge.begin()->id << " ";
+            edge.begin()++;
+        }
+        cout << endl;
+    }
+}
+
+
+
+bool vector_contains(const vector<Vertex> &v, const Vertex &vertex) {
+    for (auto & i : v) {
+        if (i.id == vertex.id) {
+            return true;
+        }
+    }
+    return false;
+}
+
+vector<Vertex> Graph::walk_bfs(int index_v, const function<vector<Vertex>(const Vertex &)>& action) const {
+    Vertex start_vertex = graph[index_v];
+    vector<Vertex> walk_v;
+    vector<Vertex> queue;
+    queue.push_back(start_vertex);
+    while (!queue.empty()) {
+        Vertex v = queue[0];
+        walk_v.push_back(v);
+        queue.erase(queue.begin());
+        action(v);
+        vector<Edge> edges = v.edge;
+        int i = 0;
+
+        while (i < edges.size()) {
+
+
+            int index = find_vertex(edges[i].id);
+            if (!vector_contains(walk_v, graph[index])) {
+                queue.push_back(graph[index]);
+            }
+
+            i++;
+        }
+    }
+    return walk_v;
+}
+
+vector<Edge> Graph::shortest_path(const Vertex &from, const Vertex &to) const {
+
+}
+
+
+
+
+
 
 
 
