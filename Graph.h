@@ -45,7 +45,7 @@ public:
 
 
     //поиск кратчайшего пути
-    vector<Edge> shortest_path(const Vertex& from,const Vertex& to) const;
+
 
     size_t order() const; //порядок
     size_t degree() const; //степень
@@ -55,8 +55,7 @@ public:
     vector<Vertex>  walk_bfs(int index_v, const function<vector<Vertex>(const Vertex&)>& action)const;
 
 
-
-
+    vector<int> shortest_path(int id_from, int id_to) const;
 };
 
 

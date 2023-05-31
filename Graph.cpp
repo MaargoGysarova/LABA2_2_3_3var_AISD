@@ -156,6 +156,10 @@ vector<Vertex> Graph::walk_bfs(int index_v, const function<vector<Vertex>(const 
     queue.push_back(start_vertex);
     while (!queue.empty()) {
         Vertex v = queue[0];
+        if (vector_contains(walk_v, v)) {
+            queue.erase(queue.begin());
+            continue;
+        }
         walk_v.push_back(v);
         queue.erase(queue.begin());
         action(v);
@@ -176,9 +180,32 @@ vector<Vertex> Graph::walk_bfs(int index_v, const function<vector<Vertex>(const 
     return walk_v;
 }
 
-vector<Edge> Graph::shortest_path(const Vertex &from, const Vertex &to) const {
-
+// алгоритм Беллмана-Форда
+vector<int> Graph::shortest_path(int id_from, int id_to) const {
+    int index_from = find_vertex(id_from);
+    int index_to = find_vertex(id_to);
+    if (index_from == -1 || index_to == -1) {
+        throw "Vertex not found";
+    }
+    vector<>
+    vector<int> distance(graph.size(), INT_MAX);
+    distance[index_from] = 0;
+    for (int i = 0; i < 6; i++) {
+        for (int j = 0; j < 5 ; j++) {
+            vector<Edge> edges = graph[j].edge;
+            for (int k = 0; k < edges.size(); k++) {
+                int index = find_vertex(edges[k].id);
+                if (distance[j] != INT_MAX && distance[j] + edges[k].weight < distance[index]) {
+                    distance[index] = distance[j] + edges[k].weight;
+                }
+            }
+        }
+    }
+    return distance;
 }
+
+
+
 
 
 

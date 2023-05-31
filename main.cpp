@@ -20,13 +20,19 @@ int main() {
     graph.add_vertex(40);
     graph.add_vertex(50);
     graph.add_vertex(60);
-    graph.add_edge(10, 20, 1);
-    graph.add_edge(10, 30, 1);
-    graph.add_edge(30, 60, 1);
-    graph.add_edge(20, 40, 1);
-    graph.add_edge(20, 50, 1);
+    graph.add_edge(10, 20, 3);
+    graph.add_edge(10, 30, 3);
+    graph.add_edge(30, 60, 4);
+    graph.add_edge(20, 40, 3);
+    graph.add_edge(20, 50, 2);
+
 
     graph.walk_bfs(graph.find_vertex(10), action);
+    vector<int> path = graph.shortest_path(10, 60);
+    for (int i : path) {
+      cout << i << " ";
+    }
+
 
     return 0;
 
