@@ -150,6 +150,16 @@ bool vector_contains(const vector<Vertex> &v, const Vertex &vertex) {
     return false;
 }
 
+// функция проверки наличия числа в векторе
+bool vector_contains_2(const vector<int> &v, int number) {
+    for (auto & i : v) {
+        if (i == number) {
+            return true;
+        }
+    }
+    return false;
+}
+
 vector<Vertex> Graph::walk_bfs(int index_v, const function<vector<Vertex>(const Vertex &)>& action) const {
     Vertex start_vertex = graph[index_v];
     vector<Vertex> walk_v;
@@ -221,27 +231,43 @@ vector<int> Graph::shortest_path(int id_from, int id_to) const {
 
 }
 
-int Graph::max_average_length() const {
+vector<int> Graph::max_average_length() const {
+    vector<int> result ;
     int max_length = 0;
     int max_length_id = 0;
+    int max_id = -1;
+    vector <int> v;
     for (int i=0; i < graph.size(); i++){
+        v.clear();
         vector<Edge> edge = graph[i].edge;
-        for (int j = 0 ; i<edge.size();i++){
-            max_length_id = edge[j].weight;
-            vector<Edge> edge2 = graph[edge[j].id].edge;
-            for (auto & k : edge2){
-                if (k.id== graph[i].id){
-                    max_length_id += k.weight;
-                    break;
+        if (edge.empty()){
+            continue;
+        }
+        for (int j = 0 ; j<edge.size();j++){
+            if (find_vertex(edge[j].id) != find_vertex(graph[i].id)) {
+                max_length_id += edge[j].weight;
+                v.push_back(edge[j].id);
+            }
+        }
+        for (int k = 0 ; k<edge.size();k++){
+            vector<Edge> edge2 = graph[k].edge;
+            if(graph[k].id != graph[i].id || !edge2.empty() || !vector_contains_2(v, edge2[k].id)) {
+
+                for (int l = 0; l < edge2.size(); l++) {
+                    if (find_vertex(edge[l].id) == find_vertex(graph[i].id)) {
+                        max_length_id += edge[l].weight;
+                    }
                 }
             }
-
         }
        if  (max_length_id> max_length){
-           max_length = max_length_id;
+            max_length = max_length_id;
+            max_id = i;
        }
     }
-    return max_length;
+    result.push_back(max_id);
+    result.push_back(max_length);
+    return result;
 }
 
 
