@@ -241,18 +241,19 @@ vector<int> Graph::max_average_length() const {
         v.clear();
         max_length_id = 0;
         vector<Edge> edge = graph[i].edge;
-        if (edge.empty()){
-            continue;
-        }
+        if (!edge.empty()){
+
+
         for (int j = 0 ; j<edge.size();j++){
             if (find_vertex(edge[j].id) != find_vertex(graph[i].id)) {
                 max_length_id += edge[j].weight;
                 v.push_back(edge[j].id);
             }
         }
-        for (int k = 0 ; k<edge.size();k++){
+        }
+        for (int k = 0 ; k<graph.size();k++){
             vector<Edge> edge2 = graph[k].edge;
-            if(graph[k].id != graph[i].id && !edge2.empty() && !vector_contains_2(v, edge2[k].id)) {
+            if(graph[k].id != graph[i].id && !edge2.empty() && !vector_contains_2(v, graph[k].id)) {
 
                 for (int l = 0; l < edge2.size(); l++) {
                     if (edge2[l].id == graph[i].id) {
