@@ -33,14 +33,22 @@ int main() {
 
 
     graph.walk_bfs(graph.find_vertex(10), action);
-    vector<int> path = graph.shortest_path(10, 60);
-    //for (int i : path) {
-     // cout << i;
-    //}
-    vector<int > V = graph.max_average_length();
-    for (int i : V) {
-        cout << i << endl;
+    vector<int> path = graph.shortest_path(10, 60)[0];
+    cout << endl;
+    vector<int> distance_all =  graph.shortest_path(10, 60)[1];
+    cout << "Длина кратчайшего пути: " << distance_all[5] << endl;
+    cout << "Кратчайший путь: ";
+    for (int i = 0; i < path.size(); i++) {
+        cout << path[i] << " ";
     }
+    cout << endl << "Кратчайшие пути до всех вершин:" << endl;
+    for (int i = 0; i < distance_all.size(); i++) {
+        cout << distance_all[i] << " ";
+    }
+    vector<int > V = graph.max_average_length();
+    cout << endl;
+    cout << "Вершина с максимальным весом ребер: " << V[0] << endl;
+    cout << "Вес ребер: " << V[1] << endl;
 
 
     return 0;

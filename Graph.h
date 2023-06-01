@@ -55,7 +55,7 @@ public:
     vector<Vertex>  walk_bfs(int index_v, const function<vector<Vertex>(const Vertex&)>& action)const;
 
 
-    vector<int> shortest_path(int id_from, int id_to) const;
+    vector<vector<int>> shortest_path(int id_from, int id_to) const;
 
     vector<int> max_average_length() const;
 };

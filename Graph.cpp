@@ -5,6 +5,7 @@
 #include "Graph.h"
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 #include <iterator>
 using namespace std;
 
@@ -192,7 +193,7 @@ vector<Vertex> Graph::walk_bfs(int index_v, const function<vector<Vertex>(const 
 }
 
 // алгоритм Беллмана-Форда
-vector<int> Graph::shortest_path(int id_from, int id_to) const {
+vector<vector<int>> Graph::shortest_path(int id_from, int id_to) const {
 
     int index_from = find_vertex(id_from);
     int index_to = find_vertex(id_to);
@@ -202,6 +203,10 @@ vector<int> Graph::shortest_path(int id_from, int id_to) const {
     vector<int> path;
     vector<int> distance(graph.size(), INT_MAX);
     vector<int> p (graph.size(), -1);
+    std::vector<int> result_path;
+
+
+
     distance[index_from] = 0;
     for (int i = 0; i < graph.size() - 1; i++) {
         for (int j = 0; j < graph.size(); j++) {
@@ -226,7 +231,20 @@ vector<int> Graph::shortest_path(int id_from, int id_to) const {
         }
     }
 
-    return distance;
+    // восстановление пути
+    int index = index_to;
+    while (index != index_from) {
+        path.push_back(index);
+        index = p[index];
+    }
+    path.push_back(index_from);
+
+    for (int i = path.size() - 1; i >= 0; i--) {
+        result_path.push_back(graph[path[i]].id);
+    }
+
+    vector<vector<int >> itog = {result_path, distance};
+    return itog;
 
 
 }
@@ -267,7 +285,7 @@ vector<int> Graph::max_average_length() const {
             max_id = i;
        }
     }
-    result.push_back(max_id);
+    result.push_back(graph[max_id].id);
     result.push_back(max_length);
     return result;
 }
