@@ -34,9 +34,9 @@ int main() {
 
     graph.walk_bfs(graph.find_vertex(10), action);
     vector<int> path = graph.shortest_path(10, 60);
-    for (int i : path) {
-      cout << i;
-    }
+    //for (int i : path) {
+     // cout << i;
+    //}
     vector<int > V = graph.max_average_length();
     for (int i : V) {
         cout << i << endl;
