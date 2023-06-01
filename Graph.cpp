@@ -5,6 +5,7 @@
 #include "Graph.h"
 #include <iostream>
 #include <vector>
+#include <iterator>
 using namespace std;
 
 Graph::~Graph() {
@@ -190,6 +191,7 @@ vector<int> Graph::shortest_path(int id_from, int id_to) const {
     }
     vector<int> path;
     vector<int> distance(graph.size(), INT_MAX);
+    vector<int> p (graph.size(), -1);
     distance[index_from] = 0;
     for (int i = 0; i < graph.size() - 1; i++) {
         for (int j = 0; j < graph.size(); j++) {
@@ -198,6 +200,7 @@ vector<int> Graph::shortest_path(int id_from, int id_to) const {
                 int index = find_vertex(edges[k].id);
                 if (distance[j] != INT_MAX && distance[j] + edges[k].weight < distance[index]) {
                     distance[index] = distance[j] + edges[k].weight;
+                    p[index] = j;
 
                 }
             }
@@ -213,17 +216,35 @@ vector<int> Graph::shortest_path(int id_from, int id_to) const {
         }
     }
 
-
-
-
-
-
-
-
     return distance;
 
 
 }
+
+int Graph::max_average_length() const {
+    int max_length = 0;
+    int max_length_id = 0;
+    for (int i=0; i < graph.size(); i++){
+        vector<Edge> edge = graph[i].edge;
+        for (int j = 0 ; i<edge.size();i++){
+            max_length_id = edge[j].weight;
+            vector<Edge> edge2 = graph[edge[j].id].edge;
+            for (auto & k : edge2){
+                if (k.id== graph[i].id){
+                    max_length_id += k.weight;
+                    break;
+                }
+            }
+
+        }
+       if  (max_length_id> max_length){
+           max_length = max_length_id;
+       }
+    }
+    return max_length;
+}
+
+
 
 
 

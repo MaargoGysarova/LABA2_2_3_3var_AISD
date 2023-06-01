@@ -56,6 +56,8 @@ public:
 
 
     vector<int> shortest_path(int id_from, int id_to) const;
+
+    int max_average_length() const;
 };
 
 

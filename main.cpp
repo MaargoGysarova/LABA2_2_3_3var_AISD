@@ -20,11 +20,14 @@ int main() {
     graph.add_vertex(40);
     graph.add_vertex(50);
     graph.add_vertex(60);
+    graph.add_vertex(70);
     graph.add_edge(10, 20, 3);
     graph.add_edge(10, 30, 3);
     graph.add_edge(30, 60, 4);
     graph.add_edge(20, 40, 3);
     graph.add_edge(20, 50, 2);
+    graph.add_edge(50, 70, 12);
+    graph.add_edge(60, 70, 10);
 
 
     graph.walk_bfs(graph.find_vertex(10), action);
@@ -32,6 +35,8 @@ int main() {
     for (int i : path) {
       cout << i << " ";
     }
+    int V = graph.max_average_length();
+    cout << endl << V << endl;
 
 
     return 0;
