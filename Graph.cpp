@@ -1,11 +1,7 @@
-//
-// Created by Маргарита Гусарова on 14.05.2023.
-//
 
 #include "Graph.h"
 #include <iostream>
 #include <vector>
-#include <unordered_map>
 #include <iterator>
 using namespace std;
 
@@ -141,7 +137,7 @@ void Graph::print() const {
 }
 
 
-
+// функция проверки Узла в массиве
 bool vector_contains(const vector<Vertex> &v, const Vertex &vertex) {
     for (auto & i : v) {
         if (i.id == vertex.id) {
@@ -161,6 +157,7 @@ bool vector_contains_2(const vector<int> &v, int number) {
     return false;
 }
 
+// Обход в ширину с испльзованием очереди
 void Graph::walk_bfs(int index_v, const function<vector<Vertex>(const Vertex &)>& action) const {
     Vertex start_vertex = graph[index_v];
     vector<Vertex> walk_v;
@@ -192,7 +189,7 @@ void Graph::walk_bfs(int index_v, const function<vector<Vertex>(const Vertex &)>
 }
 
 // алгоритм Беллмана-Форда
-vector<vector<int>> Graph::shortest_path(int id_from, int id_to) const {
+vector<vector<int>> Graph::shortest_path_Ford(int id_from, int id_to) const {
 
     int index_from = find_vertex(id_from);
     int index_to = find_vertex(id_to);
@@ -248,6 +245,7 @@ vector<vector<int>> Graph::shortest_path(int id_from, int id_to) const {
 
 }
 
+// Задача № 3
 vector<int> Graph::max_average_length() const {
     vector<int> result ;
     int max_length = 0;

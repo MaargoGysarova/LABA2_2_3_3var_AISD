@@ -33,7 +33,7 @@ private:
     vector<Vertex> graph;
 public:
     ~Graph(); // Деструктор
-    int find_vertex(int id) const; //Проверка наличия вершины
+    [[nodiscard]] int find_vertex(int id) const; //Проверка наличия вершины
     bool add_vertex(int id); //Добавление вершины
     bool delete_vertex(int id); //Удаление вершины
 
@@ -43,21 +43,16 @@ public:
 
     vector<Edge>& edges(const Vertex& vertex);//получение всех ребер, выходящих из вершины по ссылке
 
-
-    //поиск кратчайшего пути
-
-
-    size_t order() const; //порядок
-    size_t degree() const; //степень
+    [[nodiscard]] size_t order() const; //порядок
+    [[nodiscard]] size_t degree() const; //степень
 
     void print() const; //вывод графа
 
-    void walk_bfs(int index_v, const function<vector<Vertex>(const Vertex&)>& action)const;
+    void walk_bfs(int index_v, const function<vector<Vertex>(const Vertex&)>& action)const; // обход в ширину
 
 
-    vector<vector<int>> shortest_path(int id_from, int id_to) const;
-
-    vector<int> max_average_length() const;
+    [[nodiscard]] vector<vector<int>> shortest_path_Ford(int id_from, int id_to) const; // Нахождения кратчайшего пути по Форду
+    [[nodiscard]] vector<int> max_average_length() const; // нахождение Вершины с максимальным числом веса смежных ребер Задача №3
 };
 
 
