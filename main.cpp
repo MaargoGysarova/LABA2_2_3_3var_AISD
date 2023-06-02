@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Graph.h"
+static vector<Vertex> visited;
 using namespace std;
 
 
@@ -8,7 +9,6 @@ int main() {
 
     Graph graph;
     action = [](const Vertex& vertex){
-        vector<Vertex> visited;
         cout << vertex.id << endl;
         visited.push_back(vertex);
         return visited;
@@ -33,6 +33,7 @@ int main() {
 
 
     graph.walk_bfs(graph.find_vertex(10), action);
+    vector<Vertex> walk_path = visited;
     vector<int> path = graph.shortest_path(10, 60)[0];
     cout << endl;
     vector<int> distance_all =  graph.shortest_path(10, 60)[1];

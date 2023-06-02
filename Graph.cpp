@@ -161,7 +161,7 @@ bool vector_contains_2(const vector<int> &v, int number) {
     return false;
 }
 
-vector<Vertex> Graph::walk_bfs(int index_v, const function<vector<Vertex>(const Vertex &)>& action) const {
+void Graph::walk_bfs(int index_v, const function<vector<Vertex>(const Vertex &)>& action) const {
     Vertex start_vertex = graph[index_v];
     vector<Vertex> walk_v;
     vector<Vertex> queue;
@@ -189,7 +189,6 @@ vector<Vertex> Graph::walk_bfs(int index_v, const function<vector<Vertex>(const 
             i++;
         }
     }
-    return walk_v;
 }
 
 // алгоритм Беллмана-Форда

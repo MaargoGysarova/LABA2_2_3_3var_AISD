@@ -52,7 +52,7 @@ public:
 
     void print() const; //вывод графа
 
-    vector<Vertex>  walk_bfs(int index_v, const function<vector<Vertex>(const Vertex&)>& action)const;
+    void walk_bfs(int index_v, const function<vector<Vertex>(const Vertex&)>& action)const;
 
 
     vector<vector<int>> shortest_path(int id_from, int id_to) const;
