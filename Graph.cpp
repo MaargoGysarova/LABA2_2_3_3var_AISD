@@ -287,6 +287,13 @@ vector<int> Graph::max_average_length() const {
     return result;
 }
 
+void Graph::vertices(vector<int> &v) const {
+    for(int i=0;i<graph.size();i++){
+        v.push_back(graph[i].id);
+    }
+}
+
+
 
 
 

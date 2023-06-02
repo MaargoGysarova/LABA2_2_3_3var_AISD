@@ -33,7 +33,7 @@ private:
     vector<Vertex> graph;
 public:
     ~Graph(); // Деструктор
-    [[nodiscard]] int find_vertex(int id) const; //Проверка наличия вершины
+    int find_vertex(int id) const; //Проверка наличия вершины
     bool add_vertex(int id); //Добавление вершины
     bool delete_vertex(int id); //Удаление вершины
 
@@ -41,6 +41,7 @@ public:
     bool add_edge(int id_from, int id_to, int weight); //Добавление ребра
     bool delete_edge(int id_from, int id_to); //Удаление ребра
 
+    void vertices(vector<int> &v) const;
     vector<Edge>& edges(const Vertex& vertex);//получение всех ребер, выходящих из вершины по ссылке
 
     [[nodiscard]] size_t order() const; //порядок

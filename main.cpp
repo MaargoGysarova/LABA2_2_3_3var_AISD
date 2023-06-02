@@ -34,9 +34,9 @@ int main() {
 
     graph.walk_bfs(graph.find_vertex(10), action);
     vector<Vertex> walk_path = visited;
-    vector<int> path = graph.shortest_path(10, 60)[0];
+    vector<int> path = graph.shortest_path_Ford(10, 60)[0];
     cout << endl;
-    vector<int> distance_all =  graph.shortest_path(10, 60)[1];
+    vector<int> distance_all =  graph.shortest_path_Ford(10, 60)[1];
     cout << "Длина кратчайшего пути: " << distance_all[5] << endl;
     cout << "Кратчайший путь: ";
     for (int i = 0; i < path.size(); i++) {
