@@ -288,8 +288,8 @@ vector<int> Graph::max_average_length() const {
 }
 
 void Graph::vertices(vector<int> &v) const {
-    for(int i=0;i<graph.size();i++){
-        v.push_back(graph[i].id);
+    for(const auto & i : graph){
+        v.push_back(i.id);
     }
 }
 
