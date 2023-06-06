@@ -132,7 +132,7 @@ void Graph::print() const {
         cout << i.id << ": ";
         vector <Edge> edge = i.edge;
         for(int j=0; j< edge.size(); j++) {
-            cout << edge[j].id << " ";
+            cout << edge[j].id << "("<<edge[j].weight<<")" <<" ";
         }
         cout << endl;
     }

@@ -5,9 +5,10 @@ using namespace std;
 
 void getch_(){
     cout << "Press any key to continue...";
-    cin.get();
-    cin.get();
+    getchar();
+    getchar();
 }
+
 void clear_monitor(){
     system("clear");
 }
