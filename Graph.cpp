@@ -27,6 +27,7 @@ int Graph::find_vertex(int id) const {
 
 bool Graph::add_vertex(int id) {
     if (find_vertex(id) != -1) {
+        throw invalid_argument("Vertex already exists");
         return false;
     }
     Vertex vertex(id);
@@ -37,6 +38,7 @@ bool Graph::add_vertex(int id) {
 bool Graph::delete_vertex(int id) {
     int index = find_vertex(id);
     if (index == -1) {
+        throw invalid_argument("Vertex already exists");
         return false;
     }
     vector<Edge> edge = graph[index].edge;
@@ -52,6 +54,7 @@ bool Graph::delete_vertex(int id) {
 bool Graph::find_edge(int id_from, int id_to) {
     int index_from = find_vertex(id_from);
     if (index_from == -1) {
+        throw invalid_argument("Vertex already exists");
         return false;
     }
     vector<Edge> edge = graph[index_from].edge;
@@ -128,9 +131,8 @@ void Graph::print() const {
     for (auto & i : graph) {
         cout << i.id << ": ";
         vector <Edge> edge = i.edge;
-        while (edge.begin() != edge.end()) {
-            cout << edge.begin()->id << " ";
-            edge.begin()++;
+        for(int j=0; j< edge.size(); j++) {
+            cout << edge[j].id << " ";
         }
         cout << endl;
     }
